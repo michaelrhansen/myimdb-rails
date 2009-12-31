@@ -1,0 +1,55 @@
+#content{
+}
+#content #sidebar{
+}
+#content #sidebar ul{
+}
+#content #sidebar ul li{
+}
+#content #sidebar ul li.active{
+}
+#content #sidebar ul li.active a{
+}
+#content #body{
+}
+
+/*content*/
+#movieListing > ul{ 
+}
+#movieListing > ul > li{ 
+  margin:10px;
+}
+#movieListing ul li.active-movie{ 
+}
+#movieListing ul li .content{
+}
+#movieListing ul li.active-movie .content{
+}
+#movieListing ul li ul{
+  height:465px;
+  border:1px solid #aaa;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding:10px;
+  background-color:#fff;
+}
+#movieListing ul li ul li{
+  margin:10px 0;
+}
+#movieListing ul li ul li div{
+}
+#movieListing ul li ul li.images{
+  height:270px;
+}
+#movieListing ul li ul li.clickable{
+  cursor:pointer;
+}
+#movieListing ul li ul li.name{
+  font-size:20px;
+}
+#movieListing ul li ul li.tagline{
+  color:#666;
+}
+#movieListing ul li ul li.plot{
+  color:#aaa;
+}

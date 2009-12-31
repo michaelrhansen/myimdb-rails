@@ -1,0 +1,4 @@
+<%= link_to user_link.twitter_username, '#' %>
+<div class='follow-links' <%= "style='display:none'" if user_link == current_user %>>
+  <%= friendship_status_for(user_link) %>
+</div>

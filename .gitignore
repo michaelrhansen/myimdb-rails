@@ -1,0 +1,9 @@
+/config/database.yml
+/tmp
+/local
+/log/*
+/public/medias
+/public/javascripts/all.js
+/public/stylesheets/all.css
+/tmp/restart.txt
+

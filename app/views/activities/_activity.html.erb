@@ -1,0 +1,12 @@
+<li>
+  <%= image_tag activity.user.twitter_profile_image %>
+  <div class='content'>
+    <%=h activity.content %>
+    <div class='status'>
+      by @<span class='user-status remote-user <%= activity.user.id %>-user' id="<%= activity.user.id %>-user"><%=h activity.user.twitter_username %></span>
+    </div>
+  </div>
+  <div class='backdrop'>
+    [<%= (@movie || activity.movie).name %>]
+  </div>
+</li>

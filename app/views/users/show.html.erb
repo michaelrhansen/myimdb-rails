@@ -1,0 +1,23 @@
+<p>
+  <b>Username:</b>
+  <%=h @user.username %>
+</p>
+
+<p>
+  <b>Twitter username:</b>
+  <%=h @user.twitter_username %>
+</p>
+
+<p>
+  <b>Twitter:</b>
+  <%=h @user.twitter_id %>
+</p>
+
+<p>
+  <b>Twitter profile image:</b>
+  <%=h @user.twitter_profile_image %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

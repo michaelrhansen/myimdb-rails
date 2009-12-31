@@ -1,0 +1,14 @@
+# uses a format like :
+
+credentials :
+  twitter :
+    key     : D48gf41L2x01mf2Ui116Gw
+    secret  : t7QSEH09620I0XVE2LDR0tlgbmIg3nH6lChCtotkYo
+    url     : 'http://twitter.com'
+    
+# and generates constants like
+# CredentialsTwitterKey, CredentialsTwitterSecret, CredentialsTwitterUrl
+
+site :
+  url                   : 'http://localhost:3000'
+  url_without_protocol  : 'localhost:3000'

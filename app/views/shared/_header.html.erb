@@ -1,0 +1,13 @@
+<div class='left'>
+  MyIMDB
+</div>
+<div class='right'>
+  <% if logged_in? %>
+    Logged in as: <%=h current_user.display_name %> | 
+    <%= link_to 'Home', home_path %> |
+    <%= link_to 'Browse Movies', movies_path %> |
+    <%= link_to 'Logout', session_path, :method=> :delete %>
+  <% else %>
+    <%= link_to 'Login using twitter', new_session_path, :id=> 'twitterPopup' %>
+  <% end %>
+</div>

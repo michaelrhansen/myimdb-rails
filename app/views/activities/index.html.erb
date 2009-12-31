@@ -1,0 +1,9 @@
+<% unless @activities.empty? %>
+  <ul class='activities'>
+    <%= render :partial=> 'activities/activity', :collection=> @activities %>
+  </ul>
+<% else %>
+  <div class='no-data'>
+    No activity available
+  </div>
+<% end %>

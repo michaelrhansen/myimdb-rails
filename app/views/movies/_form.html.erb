@@ -1,0 +1,12 @@
+<% form_for @movie, :builder=> MyFormBuilder do |f| -%>
+  <%= f.error_messages(:header_message=> "Oops!  We found #{pluralize @movie.errors.length, 'error'}.", :message=> nil) %>
+  
+  <% f.wrapper do %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  <% end %>
+  
+  <% f.wrapper do %>
+    <%= f.submit 'Save' %> or <%= link_to 'cancel', movies_path %>
+  <% end %>
+<% end -%>

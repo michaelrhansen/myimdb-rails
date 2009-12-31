@@ -1,0 +1,42 @@
+<div id="movie_details">
+  <div class='movie-data'>
+    <h3><%=h movie.name %> (<%=h movie.release_year %>)</h3>
+
+    <div class='component'>
+      <label class='heading'>Tagline:</label>
+      <p class='data'><%=h movie.tagline %></p>
+    </div>
+
+    <div class='component'>
+      <label class='heading'>Plot:</label>
+      <p class='data'><%=h movie.plot %></p>
+    </div>
+  </div>
+
+  <div class='actions component'>
+    <%= MovieStatus::Statuses.collect do |status, value|
+      link_to(status, movie_statuses_path('movie_status[status_id]'=> value, 'movie_status[movie_id]'=> movie.id),
+        :class            => "#{('active' if movie.movie_statuses.find_by_status_id_and_user_id(value, current_user.id))}",
+        :"data-ajax"      => true,
+        :"data-spinner"   => "movie-status-spinner",
+        :"data-complete"  => "toggleActiveStatusClass")
+      end.join('') %>
+    <%= indicator(:id=> "movie-status-spinner") %>
+  </div>
+  
+  <div id="tabs">
+    <ul>
+      <li><a href="#tabs-reviews">Reviews</a></li>
+      <li><a href="#tabs-images">Images</a></li>
+      <li><a href="<%= friend_movie_activities_path(@movie) %>">Friend Activity</a></li>
+      <li><a href="<%= movie_activities_path(@movie) %>">All Activity</a></li>
+    </ul>
+    <div id="tabs-reviews">
+      <%= render movie.all_reviews %>
+    </div>
+    <div id="tabs-images">
+      <%= render :partial=> 'medias/movie_medias', :locals=> { :movie=> movie } %>
+    </div>
+  </div>
+  
+</div>

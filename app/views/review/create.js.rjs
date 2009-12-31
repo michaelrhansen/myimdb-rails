@@ -1,0 +1,1 @@
+page.replace_html "#{@review.dom_class}-#{@movie.id}", :partial=> "review/#{@review.dom_class}s/#{@review.dom_class}", :object=> @review

@@ -1,0 +1,14 @@
+# uses a format like :
+
+credentials :
+  twitter :
+    key     : RzSznpt2yglMeasMGOZ8Pw
+    secret  : MGDozMlkXzK1dA16tvsMB7KrmyNu7uFw9jm3wlLZs
+    url     : 'http://twitter.com'
+    
+# and generates constants like
+# CredentialsTwitterKey, CredentialsTwitterSecret, CredentialsTwitterUrl
+
+site :
+  url                   : 'http://s.gridbag.com:3000'
+  url_without_protocol  : 's.gridbag.com:3000'

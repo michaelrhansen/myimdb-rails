@@ -1,0 +1,4 @@
+<li class="ui-state-default" id="<%= media.id %>-sortable-media">
+  <%= link_to_remote "Remove", :url=> [@movie, media], :method=> :delete, :html=> { :class=> 'remove' } %>
+  <%= image_tag media.public_filename(:thumb) %>
+</li>

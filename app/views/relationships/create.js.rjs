@@ -1,0 +1,6 @@
+if @relationship.new_record?
+  page.flash.error("Unable to create the relationship")
+else
+  page.flash.notice("Relationship created successfully")
+  page.replace_html ".#{@relationship.user.id}-user", :partial=> "users/user_link", :object=> @relationship.user
+end

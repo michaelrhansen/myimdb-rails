@@ -1,0 +1,11 @@
+<script>
+  if(window.opener == null){
+    window.location.href = '<%= @reload_path_for_popup %>';
+  }
+  else{
+    <% if @reload_path_for_popup %>
+      window.opener.location.href = '<%= @reload_path_for_popup %>';
+    <% end %>
+    self.close();
+  }
+</script>

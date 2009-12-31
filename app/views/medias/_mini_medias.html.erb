@@ -1,0 +1,13 @@
+<a class="prevPage browse">left</a> 
+<div class="scrollable">     
+  <div class="items"> 
+    <% mini_medias.each do |media| %>
+      <div><div>
+        <a href="<%= media.public_filename %>" title="<%= movie.name %>">
+          <%= image_tag media.public_filename(:thumb) %>
+        </a>
+      </div></div>
+    <% end %>
+  </div> 
+</div>
+<a class="nextPage browse">right</a>

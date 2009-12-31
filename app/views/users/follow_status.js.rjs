@@ -1,0 +1,3 @@
+@users.each do |user|
+  page.replace_html ".#{user.id}-user", :partial=> "users/user_link", :object=> user
+end

@@ -1,0 +1,2 @@
+page.insert_html :top, "sortable-images", :partial=> 'medias/media', :object=> @media
+page << "$('form#new_media').resetForm()"

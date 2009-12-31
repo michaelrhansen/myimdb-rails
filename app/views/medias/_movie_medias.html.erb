@@ -1,0 +1,14 @@
+<ul id='sortable-images' data-movie-id='<%= movie.id %>'>
+  <%= render movie.medias %>
+  <li class="add">
+    <div>
+      <%= link_to_function "+", "$(this).parents('li').addClass('adding')", :class=> "add-link" %>
+
+      <% remote_form_for [@movie, Media.new] do |f| %>
+        <%= f.text_field :source_url %>
+        <%= f.submit "Add" %>
+        <%= link_to_function "Cancel", "$(this).parents('li').removeClass('adding')" %>
+      <% end %>
+    </div>
+  </li>
+</ul>
