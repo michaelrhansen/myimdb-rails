@@ -286,3 +286,9 @@ Flash = {
       $('#flash').slideDown(200).fadeTo(Rails.flashShowDelay, 1).slideUp(200, function(){ jQuery(this).html('') });
   }
 }
+
+Search = {
+  fuzzy : function(q){
+    $('#fuzzy-search-results').load('/movies/fuzzy?q=' + encodeURI(q));
+  }
+}

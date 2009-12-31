@@ -4,7 +4,7 @@ class Movie < ActiveRecord::Base
   default_scope :order=> "popularity DESC, movie_statuses_count"
 
   validates_presence_of :name
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :case_sensitive=> false
 
   has_many :movie_directors, :dependent=> :destroy
   has_many :directors, :through=> :movie_directors
@@ -44,6 +44,19 @@ class Movie < ActiveRecord::Base
         :source_url => url,
         :owner      => self) rescue nil
     end
-      
+  end
+  
+  def self.locate(options={})
+    search_term = options[:q].try(:strip)
+    
+    if search_term.blank?
+      return Movie.all
+    end
+
+    if options[:fuzzy]
+      Movie.all(:conditions=> ["name like ? and name != ?", "%#{search_term}%", search_term])
+    else
+      Movie.all(:conditions=> { :name=> search_term })
+    end
   end
 end

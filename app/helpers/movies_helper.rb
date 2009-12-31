@@ -7,4 +7,8 @@ module MoviesHelper
       review.resource_url
     end + javascript_tag("$('##{ identifier }').editable('#{ send("movie_#{review_type}_path", @movie) }', { ajaxoptions: { dataType : 'script' } });")
   end
+  
+  def searching?
+    !!params[:q].try(:strip)
+  end
 end

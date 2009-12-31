@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :movie_statuses
   map.resources :activities
   
-  map.resources :movies, :collection=> { :autofill=> :post } do |movie|
+  map.resources :movies, :collection=> { :autofill=> :post, :fuzzy=> :get } do |movie|
     movie.namespace :review do |review|
       review.resource :imdb_review
       review.resource :metacritic_review

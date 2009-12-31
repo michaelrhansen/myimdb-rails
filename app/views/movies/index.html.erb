@@ -1,5 +1,28 @@
 <div id='movieListing'>
-  <ul class='row'>
-    <%= render :partial=> 'movies/mini_movie', :collection=> @movies %>
-  </ul>
+  <% if searching? %>
+    <h3 class='search-result-header'>Exact Matches</h3>
+
+    <% if @movies.empty? %>
+      <%= link_to "Add this Movie", movies_path('movie[name]'=> params[:q]), :method=> :post, :class=> "add-movie" %>
+    <% end %>
+  <% end %>
+
+  <% with_data_for @movies do %>
+    <ul class='row'>
+      <%= render :partial=> 'movies/mini_movie', :collection=> @movies %>
+    </ul>
+  <% end %>
+
+
+  <% if searching? %>
+    <h3 class='search-result-header'>Non - Exact Matches</h3>
+    <div id="fuzzy-search-results">
+      <div id='search-wait'>
+        <%= indicator(:style=> "display:inline") %> Loading ... 
+      </div>
+    </div>
+    <% on_page_ready do %>
+      Search.fuzzy('<%= params[:q] %>');
+    <% end %>
+  <% end %>
 </div>

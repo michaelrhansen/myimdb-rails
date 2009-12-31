@@ -61,4 +61,12 @@ module ApplicationHelper
     end
   end
   
+  def with_data_for(records, &block)
+    if records.blank?
+      concat("<div class='no-data'>[No data found]</div>")
+    else
+      concat(capture(&block))
+    end
+  end
+  
 end

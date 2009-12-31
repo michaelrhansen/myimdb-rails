@@ -2,10 +2,19 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.xml
   def index
-    # @movies = Movie.all(:include=> :movie_statuses, :conditions=> "movie_statuses.user_id=#{current_user.id}", :select=> "movies.*, movie_statuses.id")
-    @movies = Movie.all
+    @movies = Movie.locate(:page=> params[:page], :q=> params[:q])
+
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
+      format.xml  { render :xml => @movies }
+    end
+  end
+  
+  def fuzzy
+    @movies = Movie.locate(:page=> params[:page], :q=> params[:q], :fuzzy=> true)
+
+    respond_to do |format|
+      format.html { render :layout=> false }
       format.xml  { render :xml => @movies }
     end
   end

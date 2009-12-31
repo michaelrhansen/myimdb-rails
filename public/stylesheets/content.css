@@ -11,13 +11,31 @@
 #content #sidebar ul li.active a{
 }
 #content #body{
+  width:960px;
+  margin:0 auto;
 }
 
 /*content*/
+
 #movieListing > ul{ 
 }
-#movieListing > ul > li{ 
+#movieListing > ul > li, #movieListing div#fuzzy-search-results > ul > li{ 
   margin:10px;
+}
+#movieListing div#fuzzy-search-results div#search-wait{
+  margin-left:10px;
+}
+#movieListing .no-data{
+  width:300px;
+}
+#movieListing a.add-movie{
+  font-size:22px;
+  float:right;
+  margin:10px;
+  font-weight:bold;
+  padding:6px 0 6px 40px;
+  background:transparent url(/images/icons/simplicio-icon-set/32x32/notification_add.png) no-repeat 0 0;
+  text-decoration:none;
 }
 #movieListing ul li.active-movie{ 
 }
@@ -52,4 +70,14 @@
 }
 #movieListing ul li ul li.plot{
   color:#aaa;
+}
+
+#movieListing h3.search-result-header{
+  color:#CD5300;
+  border-bottom: 2px solid #CD5300;
+  margin:10px;
+  padding-bottom:3px;
+}
+#movieListing h3.search-result-header:after{
+  content:' >>>';
 }

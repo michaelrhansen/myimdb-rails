@@ -1,0 +1,5 @@
+<% with_data_for @movies do %>
+  <ul class='row'>
+    <%= render :partial=> 'movies/mini_movie', :collection=> @movies %>
+  </ul>
+<% end%>
