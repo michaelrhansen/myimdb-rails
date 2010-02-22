@@ -27,7 +27,6 @@ class Movie < ActiveRecord::Base
   accepts_nested_attributes_for :directors
   
   after_create :pull_images
-
   
   def associate_reviews
     self.imdb_movie_review              = Review::ImdbReview.init_with_name(name)
@@ -44,7 +43,7 @@ class Movie < ActiveRecord::Base
   end
   
   def pull_images
-    Myimdb::Search::Google.search_images(name, :size=> 'medium')[0..4].collect{ |image| image['url'] }.each do |url|
+    Myimdb::Search::Google.search_images(name, :size=> 'medium')[0..4].collect{ |image| image[:url] }.each do |url|
       Media.create(
         :source_url => url,
         :owner      => self) rescue nil

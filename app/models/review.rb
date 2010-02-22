@@ -50,8 +50,8 @@ class Review < ActiveRecord::Base
   def self.locate(name)
     search_result = Myimdb::Search::Google.search_text(name, :restrict_to=> search_scope)[0]
     if search_result
-      url   = search_result['url']
-      title = search_result['titleNoFormatting']
+      url   = search_result[:url]
+      title = search_result[:title]
       id    = get_identifier_from_url(url)
       { :id=> id, :url=> url, :title=> title }
     end

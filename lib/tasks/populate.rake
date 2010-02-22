@@ -22,8 +22,8 @@ namespace :db do
       begin
         Movie.create(:name=> name)
         p "Created: #{name}"
-      rescue 
-        p "Error in: #{name}"
+      rescue Exception=> ex
+        p "Error in: #{name} because: #{ex.message}"
       end
     end
   end

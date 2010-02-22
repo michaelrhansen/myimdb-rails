@@ -1,10 +1,11 @@
 class Media < ActiveRecord::Base
   default_scope :order=> "position"
-  has_attachment :content_type => :image, 
-                 :storage => :file_system, 
-                 :max_size => 500.kilobytes,
-                 :resize_to => '500x500>',
-                 :thumbnails => { :thumb => 'c200x250' }
+  has_attachment :content_type  => :image,
+                 :storage       => :file_system,
+                 :min_size      => 0,
+                 :max_size      => 500.kilobytes,
+                 :resize_to     => '500x500>',
+                 :thumbnails    => { :thumb => 'c200x250' }
 
   validates_as_attachment
   
