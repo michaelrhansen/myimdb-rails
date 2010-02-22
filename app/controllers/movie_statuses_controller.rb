@@ -1,18 +1,17 @@
 class MovieStatusesController < ApplicationController
-  def create
-    if @movie_status = MovieStatus.find_by_status_id_and_movie_id_and_user_id(
-      params[:movie_status][:status_id], 
-      params[:movie_status][:movie_id], 
-      current_user.id)
-      @movie_status.destroy
-    else
-      @movie_status = MovieStatus.new(params[:movie_status].merge(:user=> current_user))
-      @movie_status.save
-    end
+  before_filter :get_movie
+
+  def toggle
+    MovieStatus.toggle(:movie_id=> @movie.id, :status_id=> params[:id], :user_id=> current_user.id)
 
     respond_to do |format|
       format.js
       format.xml  { head :ok }
     end
   end
+  
+  private
+    def get_movie
+      @movie = Movie.find(params[:movie_id])
+    end
 end

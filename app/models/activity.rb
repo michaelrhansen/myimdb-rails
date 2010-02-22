@@ -3,6 +3,7 @@ class Activity < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :movie
+  belongs_to :resource, :polymorphic=> true
 
   named_scope :for_movie, lambda { |movie_id|
     { :conditions => movie_id ? { :movie_id => movie_id } : {} }

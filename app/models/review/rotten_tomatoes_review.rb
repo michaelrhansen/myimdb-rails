@@ -13,4 +13,8 @@ class Review::RottenTomatoesReview < Review
   def self.scraper
     Myimdb::Scraper::RottenTomatoes
   end
+  
+  def self.simple_name
+    'rotten_tomatoes'
+  end
 end

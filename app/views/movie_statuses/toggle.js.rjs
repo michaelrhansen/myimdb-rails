@@ -1,0 +1,1 @@
+page.replace "movie_status_#{@movie.id}", :partial=> 'movie_statuses/movie_statuses', :locals=> { :movie=> @movie }

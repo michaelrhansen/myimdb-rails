@@ -1,0 +1,10 @@
+<div class='actions component' id="movie_status_<%= movie.id %>">
+  <%= MovieStatus::Statuses.collect do |status_id, value|
+    link_to(value[:text], toggle_movie_movie_status_path(movie, status_id),
+      :class            => "#{('active' if movie.movie_statuses.find_by_status_id_and_user_id(status_id, current_user.id))}",
+      :"data-ajax"      => true,
+      :"data-spinner"   => "movie-status-spinner",
+      :"data-complete"  => "toggleActiveStatusClass")
+    end.join('') %>
+  <%= indicator(:id=> "movie-status-spinner") %>
+</div>

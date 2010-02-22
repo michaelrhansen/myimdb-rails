@@ -17,4 +17,8 @@ class Review::MetacriticReview < Review
   def search_filters
     'movie'
   end
+  
+  def self.simple_name
+    'metacritic'
+  end
 end

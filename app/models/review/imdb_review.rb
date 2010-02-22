@@ -16,8 +16,14 @@ class Review::ImdbReview < Review
     Myimdb::Scraper::Imdb
   end
   
+  def self.simple_name
+    'imdb'
+  end
+  
   private
     def fill_parent_details
       movie.update_attributes(:tagline=> tagline, :plot=> plot, :release_year=> year)
+      movie.directors = directors
+      movie.writers = writers
     end
 end

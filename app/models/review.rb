@@ -1,6 +1,13 @@
 class Review < ActiveRecord::Base
   belongs_to :movie
-  attr_accessor :plot, :tagline, :year
+  attr_accessor :plot, :tagline, :year, :directors, :writers
+  after_save :set_movie_rating
+  
+  AvailableTypes = [
+    :imdb,
+    :metacritic,
+    :rotten_tomatoes
+  ]
 
   def self.init_with_name(name)
     name = name + search_filters if respond_to?(:search_filters)
@@ -17,7 +24,9 @@ class Review < ActiveRecord::Base
         :body                 => data.plot,
         :plot                 => data.plot,
         :tagline              => data.tagline,
-        :year                 => data.year)
+        :year                 => data.year,
+        :directors            => data.directors_with_url,
+        :writers              => data.writers_with_url)
   rescue Exception=> ex
     p "Unable to generate review for: #{url} because: #{ex.message}"
   end
@@ -32,10 +41,12 @@ class Review < ActiveRecord::Base
       :body                 => data.plot,
       :plot                 => data.plot,
       :tagline              => data.tagline,
-      :year                 => data.year
+      :year                 => data.year,
+      :directors            => data.directors_with_url,
+      :writers              => data.writers_with_url
     }
   end
-
+  
   def self.locate(name)
     search_result = Myimdb::Search::Google.search_text(name, :restrict_to=> search_scope)[0]
     if search_result
@@ -48,5 +59,13 @@ class Review < ActiveRecord::Base
   
   def dom_class
     self.class.to_s.underscore.split('/').last
+  end
+  
+  def set_movie_rating
+    movie.update_attribute("#{self.class.simple_name}_rating", rating)
+  end
+  
+  def self.simple_name
+    raise 'not implemented'
   end
 end

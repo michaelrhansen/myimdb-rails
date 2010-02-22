@@ -13,16 +13,7 @@
     </div>
   </div>
 
-  <div class='actions component'>
-    <%= MovieStatus::Statuses.collect do |status, value|
-      link_to(status, movie_statuses_path('movie_status[status_id]'=> value, 'movie_status[movie_id]'=> movie.id),
-        :class            => "#{('active' if movie.movie_statuses.find_by_status_id_and_user_id(value, current_user.id))}",
-        :"data-ajax"      => true,
-        :"data-spinner"   => "movie-status-spinner",
-        :"data-complete"  => "toggleActiveStatusClass")
-      end.join('') %>
-    <%= indicator(:id=> "movie-status-spinner") %>
-  </div>
+  <%= render 'movie_statuses/movie_statuses', :movie=> movie %>
   
   <div id="tabs">
     <ul>

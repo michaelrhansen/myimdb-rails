@@ -2,10 +2,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :people
 
   map.resources :relationships
-  map.resources :movie_statuses
   map.resources :activities
   
   map.resources :movies, :collection=> { :autofill=> :post, :fuzzy=> :get } do |movie|
+    movie.resources :movie_statuses, :only=> [], :member=> { :toggle=> :post }
     movie.namespace :review do |review|
       review.resource :imdb_review
       review.resource :metacritic_review

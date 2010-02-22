@@ -27,4 +27,14 @@ namespace :db do
       end
     end
   end
+  
+  namespace :rebuild do
+    desc "Drop/Create/Migrate/Populate the db"
+    task :all => :environment do
+      Rake::Task["db:drop"].invoke
+      Rake::Task["db:create"].invoke
+      Rake::Task["db:schema:load"].invoke
+      Rake::Task["db:populate"].invoke
+    end
+  end
 end

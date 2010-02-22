@@ -8,6 +8,10 @@ class Movie < ActiveRecord::Base
 
   has_many :movie_directors, :dependent=> :destroy
   has_many :directors, :through=> :movie_directors
+  
+  has_many :movie_writers, :dependent=> :destroy
+  has_many :writers, :through=> :movie_writers
+  
   has_many :movie_statuses
 
   has_many :reviews
@@ -23,7 +27,9 @@ class Movie < ActiveRecord::Base
   accepts_nested_attributes_for :directors
   
   after_create :pull_images
+  after_save :add_metadata_to_related_people
 
+  
   def associate_reviews
     self.imdb_movie_review              = Review::ImdbReview.init_with_name(name)
     self.metacritic_movie_review        = Review::MetacriticReview.init_with_name(name)
@@ -59,4 +65,33 @@ class Movie < ActiveRecord::Base
       Movie.all(:conditions=> { :name=> search_term })
     end
   end
+  
+  # [{ :name=> 'name', :url=> 'imdb_url }]
+  def directors=(directors)
+    directors.each do |director|
+      person          = Person.find_or_initialize_by_name(director[:name])
+      person.imdb_url = director[:url]
+      person.save
+      
+      self.movie_directors.create(:director=> person)
+    end
+  end
+  
+  # [{ :name=> 'name', :url=> 'imdb_url }]
+  def writers=(writers)
+    writers.each do |writer|
+      person          = Person.find_or_initialize_by_name(writer[:name])
+      person.imdb_url = writer[:url]
+      person.save
+      
+      self.movie_writers.create(:writer=> person)
+    end
+  end
+  
+  private
+    def add_metadata_to_related_people
+      movie_directors.each do |director|
+        # director.add_metadata_to_director
+      end
+    end
 end

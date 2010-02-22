@@ -9,15 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091231101246) do
+ActiveRecord::Schema.define(:version => 20100222084521) do
 
   create_table "activities", :force => true do |t|
     t.string   "content"
-    t.string   "type",       :limit => 50
+    t.string   "type",          :limit => 50
     t.integer  "user_id"
     t.integer  "movie_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "resource_id"
+    t.string   "resource_type", :limit => 50
   end
 
   create_table "medias", :force => true do |t|
@@ -36,10 +38,26 @@ ActiveRecord::Schema.define(:version => 20091231101246) do
     t.integer  "position",     :default => 0
   end
 
+  create_table "movie_directors", :force => true do |t|
+    t.integer  "movie_id"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "movie_statuses", :force => true do |t|
     t.integer  "movie_id"
     t.integer  "status_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "resource_id"
+    t.string   "resource"
+  end
+
+  create_table "movie_writers", :force => true do |t|
+    t.integer  "movie_id"
+    t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,16 +69,28 @@ ActiveRecord::Schema.define(:version => 20091231101246) do
     t.text     "plot"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "popularity",           :default => 0
-    t.integer  "movie_statuses_count", :default => 0
+    t.integer  "popularity",             :default => 0
+    t.integer  "movie_statuses_count",   :default => 0
+    t.float    "imdb_rating",            :default => 0.0
+    t.float    "metacritic_rating",      :default => 0.0
+    t.float    "rotten_tomatoes_rating", :default => 0.0
   end
 
   create_table "people", :force => true do |t|
     t.string   "name"
-    t.string   "type"
     t.string   "imdb_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "movie_count_as_director",                    :default => 0.0
+    t.float    "average_rating_as_director",                 :default => 0.0
+    t.float    "average_imdb_rating_as_director",            :default => 0.0
+    t.float    "average_metacritic_rating_as_director",      :default => 0.0
+    t.float    "average_rotten_tomatoes_rating_as_director", :default => 0.0
+    t.float    "movie_count_as_writer",                      :default => 0.0
+    t.float    "average_rating_as_writer",                   :default => 0.0
+    t.float    "average_imdb_rating_as_writer",              :default => 0.0
+    t.float    "average_metacritic_rating_as_writer",        :default => 0.0
+    t.float    "average_rotten_tomatoes_rating_as_writer",   :default => 0.0
   end
 
   create_table "relationships", :force => true do |t|
