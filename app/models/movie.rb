@@ -27,7 +27,6 @@ class Movie < ActiveRecord::Base
   accepts_nested_attributes_for :directors
   
   after_create :pull_images
-  after_save :add_metadata_to_related_people
 
   
   def associate_reviews
@@ -54,7 +53,7 @@ class Movie < ActiveRecord::Base
   
   def self.locate(options={})
     search_term = options[:q].try(:strip)
-    
+
     if search_term.blank?
       return Movie.all
     end
@@ -87,11 +86,4 @@ class Movie < ActiveRecord::Base
       self.movie_writers.create(:writer=> person)
     end
   end
-  
-  private
-    def add_metadata_to_related_people
-      movie_directors.each do |director|
-        # director.add_metadata_to_director
-      end
-    end
 end

@@ -1,6 +1,6 @@
 class MovieDirector < ActiveRecord::Base
   belongs_to :movie
-  belongs_to :director, :class_name=> 'Person', :foreign_key=> 'person_id'#, :counter_cache=> "movie_count_as_director"
+  belongs_to :director, :class_name=> 'Person', :foreign_key=> 'person_id', :counter_cache=> "movie_count_as_director"
   
   def add_metadata_to_director
     Review::AvailableTypes.each do |review_type|
