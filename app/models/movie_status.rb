@@ -1,10 +1,10 @@
 class MovieStatus < ActiveRecord::Base
   Statuses = {
-    1=> { :text=> "I have this movie", :status=> "has this movie", :weightage=> 1, :logical_group=> 1 },
-    2=> { :text=> "I like this movie", :status=> "likes this movie", :weightage=> 2, :logical_group=> 2 },
-    3=> { :text=> "I hate this movie", :status=> "hates this movie", :weightage=> -2, :logical_group=> 2 },
-    4=> { :text=> "I have seen this movie", :status=> "has seen this movie", :weightage=> 1, :logical_group=> 4 },
-    5=> { :text=> "I want to see this movie", :status=> "wants to see this movie", :weightage=> 1, :logical_group=> 4 }
+    1=> { :text=> "I have this movie", :status=> "has this movie", :weightage=> 1, :logical_group=> 1, :association=> 'have' },
+    2=> { :text=> "I like this movie", :status=> "likes this movie", :weightage=> 2, :logical_group=> 2, :association=> 'like' },
+    3=> { :text=> "I hate this movie", :status=> "hates this movie", :weightage=> -2, :logical_group=> 2, :association=> 'hate' },
+    4=> { :text=> "I have seen this movie", :status=> "has seen this movie", :weightage=> 1, :logical_group=> 4, :association=> 'seen' },
+    5=> { :text=> "I want to see this movie", :status=> "wants to see this movie", :weightage=> 1, :logical_group=> 4, :association=> 'want' }
   }
   LogicalGroups = Statuses.inject({}) { |group, value| group[value[1][:logical_group]] ||= []; group[value[1][:logical_group]] << value[0]; group }
 

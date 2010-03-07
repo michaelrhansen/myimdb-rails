@@ -4,7 +4,7 @@
       <%= render :partial=> 'medias/mini_medias', :object=> mini_movie.medias, :locals=> { :movie=> mini_movie } %>
     </li>
     <li class='name clickable' title="<%=h mini_movie.name %>">
-      <div><%=h mini_movie.name %> (<%=h mini_movie.release_year %>)</div>
+      <div><%=h mini_movie.name.titleize %> (<%=h mini_movie.release_year %>)</div>
     </li>
     <li class='tagline clickable' title="<%=h mini_movie.tagline %>">
       <div><%=h mini_movie.tagline %></div>

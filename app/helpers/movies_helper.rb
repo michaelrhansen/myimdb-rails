@@ -11,4 +11,8 @@ module MoviesHelper
   def searching?
     !!params[:q].try(:strip)
   end
+  
+  def movie_search_link(movie_name)
+    
+  end
 end

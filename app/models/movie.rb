@@ -43,7 +43,7 @@ class Movie < ActiveRecord::Base
   end
   
   def pull_images
-    Myimdb::Search::Google.search_images(name, :size=> 'medium')[0..4].collect{ |image| image[:url] }.each do |url|
+    Myimdb::Search::Google.search_images(name, :size=> 'medium')[0..1].collect{ |image| image[:url] }.each do |url|
       Media.create(
         :source_url => url,
         :owner      => self) rescue nil
@@ -64,7 +64,7 @@ class Movie < ActiveRecord::Base
     end
   end
   
-  # [{ :name=> 'name', :url=> 'imdb_url }]
+  # [{ :name=> 'name', :url=> 'imdb_url' }]
   def directors=(directors)
     directors.each do |director|
       person          = Person.find_or_initialize_by_name(director[:name])
@@ -75,7 +75,7 @@ class Movie < ActiveRecord::Base
     end
   end
   
-  # [{ :name=> 'name', :url=> 'imdb_url }]
+  # [{ :name=> 'name', :url=> 'imdb_url' }]
   def writers=(writers)
     writers.each do |writer|
       person          = Person.find_or_initialize_by_name(writer[:name])
@@ -84,5 +84,14 @@ class Movie < ActiveRecord::Base
       
       self.movie_writers.create(:writer=> person)
     end
+  end
+  
+  def name=(name)
+    self[:name] = name.downcase if name
+  end
+  
+  def self.spell(movie_name)
+    movies = Myimdb::Search::Bing.spell_movie(movie_name)
+    movies and movies.first
   end
 end

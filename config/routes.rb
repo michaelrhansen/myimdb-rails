@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :relationships
   map.resources :activities
-  
+
   map.resources :movies, :collection=> { :autofill=> :post, :fuzzy=> :get } do |movie|
     movie.resources :movie_statuses, :only=> [], :member=> { :toggle=> :post }
     movie.namespace :review do |review|
@@ -20,6 +20,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection=> { :follow_status=> :get }
 
   map.root :controller => "homes", :action=> 'index'
-  
+
   map.public_profile ':username', :controller=> 'homes', :action=> 'public'
 end

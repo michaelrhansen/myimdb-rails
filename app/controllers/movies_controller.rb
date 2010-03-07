@@ -2,7 +2,13 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.xml
   def index
-    @movies = Movie.locate(:page=> params[:page], :q=> params[:q])
+    search_query  = params[:q].try(:strip).try(:downcase)
+    @movies       = Movie.locate(:page=> params[:page], :q=> search_query)
+
+    if @movies.empty?
+      @alternative_movie_name = Movie.spell(search_query) 
+      @alternative_movies     = Movie.find_all_by_name(@alternative_movie_name) if @alternative_movie_name
+    end
 
     respond_to do |format|
       format.html
@@ -22,11 +28,13 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.xml
   def show
-    @movie = Movie.find(params[:id])
+    unless handle_mood
+      @movie = Movie.find(params[:id])
 
-    respond_to do |format|
-      format.html { render :layout=> false }
-      format.xml  { render :xml => @movie }
+      respond_to do |format|
+        format.html { render :layout=> false }
+        format.xml  { render :xml => @movie }
+      end
     end
   end
 
@@ -98,4 +106,13 @@ class MoviesController < ApplicationController
 
     render :layout=> false
   end
+
+  def handle_mood
+    mood = params[:id]
+    if status =  MovieStatus::Statuses.detect{ |_,status_data| status_data[:association] == mood }
+      @movies = current_user.send(mood)
+      render :action=> 'index'
+    end
+  end
+
 end

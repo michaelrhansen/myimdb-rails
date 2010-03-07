@@ -13,8 +13,17 @@
     </ul>
   <% end %>
 
-
   <% if searching? %>
+    <% if @alternative_movie_name %>
+      <h3 class='search-result-header'>Did you mean</h3>
+      Search: <%= link_to @alternative_movie_name, movies_path(:q=> @alternative_movie_name) %>
+      <% with_data_for @alternative_movies do %>
+        <ul class='row'>
+          <%= render :partial=> 'movies/mini_movie', :collection=> @alternative_movies %>
+        </ul>
+      <% end %>
+    <% end %>
+    
     <h3 class='search-result-header'>Non - Exact Matches</h3>
     <div id="fuzzy-search-results">
       <div id='search-wait'>

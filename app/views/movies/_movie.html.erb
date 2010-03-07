@@ -1,6 +1,6 @@
 <div id="movie_details">
   <div class='movie-data'>
-    <h3><%=h movie.name %> (<%=h movie.release_year %>)</h3>
+    <h3><%=h movie.name.titleize %> (<%=h movie.release_year %>)</h3>
 
     <div class='component'>
       <label class='heading'>Tagline:</label>
@@ -14,7 +14,7 @@
   </div>
 
   <%= render 'movie_statuses/movie_statuses', :movie=> movie %>
-  
+
   <div id="tabs">
     <ul>
       <li><a href="#tabs-reviews">Reviews</a></li>

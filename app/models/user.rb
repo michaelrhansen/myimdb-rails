@@ -13,7 +13,11 @@ class User < ActiveRecord::Base
   # friends
   has_many :friendship_relationships, :class_name=> 'Relationship', :conditions=> { 'relationships.is_friend'=> true }
   has_many :friends, :through=> :friendship_relationships, :source=> :follower
-
+  
+  MovieStatus::Statuses.each do |status_id, value|
+    has_many value[:association], :through=> :movie_statuses, :conditions=> { 'movie_statuses.status_id'=> status_id }, :source=> 'movie'
+  end
+  
   def display_name
     username.blank? ? twitter_username : username
   end
